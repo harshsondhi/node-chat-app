@@ -15,14 +15,19 @@ io.on('connection', (socket) => {
   console.log('New user connected');
 
   //----
-  socket.emit('newMessage',{
-    from: 'Manu',
-    text: 'See you then',
-    createdAt:123123
-  });
+  // socket.emit('newMessage',{
+  //   from: 'Manu',
+  //   text: 'See you then',
+  //   createdAt:123123
+  // });
   //----
   socket.on('createMessage', (message) => {
          console.log('create message', message);
+         io.emit('newMessage', {
+                  from: message.from,
+                  text: message.text,
+                  createdAt: new Date().getTime()
+         });
    });
   //---
 
